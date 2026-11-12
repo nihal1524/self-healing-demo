@@ -33,7 +33,7 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 0
 
-      - uses: nihal1524/self-healing-ci@main
+      - uses: nihal1524/self-healing-ci@nihal/phase3
         with:
           test-cmd: python -m pytest -q
           setup-cmd: pip install pytest
