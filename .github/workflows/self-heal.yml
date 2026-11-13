@@ -32,6 +32,9 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           fetch-depth: 0
+          # The token that pushes self-healing/<branch>. A PAT (secret HEAL_TOKEN) makes CI run on the fix PR
+          # without approval; without it, the built-in token is used and GitHub holds the PR's CI run.
+          token: ${{ secrets.HEAL_TOKEN || secrets.GITHUB_TOKEN }}
 
       - uses: nihal1524/self-healing-ci@nihal/phase-3
         with:
@@ -40,7 +43,7 @@ jobs:
           image: python:3.11
           branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.HEAL_TOKEN || secrets.GITHUB_TOKEN }}
           # Langfuse tracing (keys come from repository secrets):
           langfuse-public-key: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
           langfuse-secret-key: ${{ secrets.LANGFUSE_SECRET_KEY }}
