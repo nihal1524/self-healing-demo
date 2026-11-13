@@ -6,9 +6,9 @@ name: Self-heal
 
 on:
   workflow_dispatch:
-  # workflow_run:
-  #   workflows: ["CI"]            # the name of your existing test workflow
-  #   types: [completed]
+  workflow_run:
+    workflows: ["CI"]            # the name of your existing test workflow
+    types: [completed]
 
 permissions:
   contents: write         # push the self-healing/<branch> branch
