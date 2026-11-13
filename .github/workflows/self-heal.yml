@@ -41,6 +41,8 @@ jobs:
           test-cmd: python -m pytest -q
           setup-cmd: pip install pytest
           image: python:3.11
+          max-attempts: "3"          # fix attempts before giving up (plus one final verification run)
+          # Other settings (defaults in the action's action.yml): model, create-pr, fail-if-unhealed.
           branch: ${{ github.event.workflow_run.head_branch || github.ref_name }}
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ secrets.HEAL_TOKEN || secrets.GITHUB_TOKEN }}
