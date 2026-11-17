@@ -1,6 +1,7 @@
 name: CI
 on:
   push:
+    branches: [main]   # branches are tested through their pull request, not twice
   pull_request:
 jobs:
   test:
